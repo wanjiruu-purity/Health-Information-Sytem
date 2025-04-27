@@ -3,11 +3,11 @@ from flask_sqlalchemy import SQLAlchemy
 
 # Initialize the Flask app and SQLAlchemy
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/health_system'  # Change this if necessary
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:@localhost/health_system' 
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-# Define the Program model
+# Program model
 class Program(db.Model):
     id = db.Column(db.String(10), primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -15,7 +15,7 @@ class Program(db.Model):
     def __repr__(self):
         return f"<Program {self.name}>"
 
-# Define the Client model
+# Client model
 class Client(db.Model):
     id = db.Column(db.String(10), primary_key=True)
     name = db.Column(db.String(100), nullable=False)
@@ -25,25 +25,25 @@ class Client(db.Model):
     def __repr__(self):
         return f"<Client {self.name}>"
 
-# Define the association table between Client and Program
+# The association table between Client and Program
 class ClientProgram(db.Model):
     __tablename__ = 'client_program'
     client_id = db.Column(db.String(10), db.ForeignKey('client.id'), primary_key=True)
     program_id = db.Column(db.String(10), db.ForeignKey('program.id'), primary_key=True)
 
-# Function to validate program IDs
+# Validate program IDs
 def validate_program_ids(program_ids):
     if not isinstance(program_ids, list) or not all(isinstance(id, str) for id in program_ids):
         abort(400, 'Program IDs must be a list of strings.')
 
-# Function to validate client data
+# Validate client data
 def validate_client_data(data):
     if 'id' not in data or 'name' not in data or 'age' not in data:
         abort(400, 'Missing required client fields: id, name, and age.')
     if not isinstance(data['age'], int):
         abort(400, 'Age must be an integer.')
 
-# Initialize the database tables 
+# Initialize database tables 
 def create_tables():
     with app.app_context():
         db.create_all()
@@ -71,7 +71,7 @@ def create_client():
     db.session.commit()
     return jsonify({'message': 'Client created successfully'}), 201
 
-# Route to enroll a client in one or more programs
+# Route to enroll a client in programs
 @app.route('/clients/<client_id>/enroll', methods=['POST'])
 def enroll_client(client_id):
     data = request.get_json()
