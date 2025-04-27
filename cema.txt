@@ -1,0 +1,58 @@
+Data used onthe demonstration video
+
+
+creating a new program
+
+http://127.0.0.1:5000/programs
+
+
+{
+  "id": "P004",
+  "name": "Physical Health"
+}
+
+
+
+____________________________________________________
+
+adding a new client
+
+http://127.0.0.1:5000/clients
+
+{
+  "id": "C005",
+  "name": "Yusuf Haji",
+  "age": 29
+}
+
+{
+  "id": "C006",
+  "name": "Ben Mwangi",
+  "age": 35
+}
+
+______________________________________________________
+
+enrolling a client to a program
+
+
+http://127.0.0.1:5000/clients/<client_id>/enroll
+
+{
+  "program_ids": ["P004", "P002"]
+}
+
+
+{
+  "program_ids": ["HIV001"]
+}
+
+______________________________________________________
+
+viewing different client profiles
+
+
+
+http://127.0.0.1:5000/clients/C006
+http://127.0.0.1:5000/clients/C005
+

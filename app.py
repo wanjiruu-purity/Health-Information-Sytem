@@ -75,6 +75,9 @@ def create_client():
 @app.route('/clients/<client_id>/enroll', methods=['POST'])
 def enroll_client(client_id):
     data = request.get_json()
+    if not data:
+        abort(400, 'Invalid or missing JSON payload.')
+
     validate_program_ids(data.get('program_ids', []))
     
     client = Client.query.get(client_id)
