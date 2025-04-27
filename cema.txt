@@ -56,3 +56,7 @@ viewing different client profiles
 http://127.0.0.1:5000/clients/C006
 http://127.0.0.1:5000/clients/C005
 
+
+
+
+https://drive.google.com/file/d/1F7rgCsYQd3TBvZZHgglOC6t4_1yOK3RA/view?usp=sharing - The Link to the google drive containing the video presentation 
